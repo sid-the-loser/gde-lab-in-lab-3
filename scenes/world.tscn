@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjjum7tvjdwc4"]
+
+[ext_resource type="PackedScene" uid="uid://t7oclgd3t01v" path="res://prefabs/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://dklhw4u6yrjba" path="res://scripts/spawner.gd" id="2_rwgxs"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="HUD" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Player/Camera2D/HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -568.0
+offset_top = -320.0
+offset_right = 568.0
+offset_bottom = -293.0
+grow_horizontal = 2
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("2_rwgxs")
