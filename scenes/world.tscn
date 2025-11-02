@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjjum7tvjdwc4"]
+[gd_scene load_steps=6 format=3 uid="uid://bjjum7tvjdwc4"]
 
 [ext_resource type="PackedScene" uid="uid://t7oclgd3t01v" path="res://prefabs/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://ctsvyio7ohibi" path="res://scripts/xp_bar.gd" id="2_71j4m"]
 [ext_resource type="Script" uid="uid://dklhw4u6yrjba" path="res://scripts/spawner.gd" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://bfou2lahiqnvj" path="res://prefabs/enemy.tscn" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://cmt6cxju6wn3d" path="res://scripts/hp_bar.gd" id="3_qfnet"]
 
 [node name="World" type="Node2D"]
 
@@ -17,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Player/Camera2D/HUD"]
+[node name="XP" type="ProgressBar" parent="Player/Camera2D/HUD"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -26,6 +29,28 @@ offset_top = -320.0
 offset_right = 568.0
 offset_bottom = -293.0
 grow_horizontal = 2
+script = ExtResource("2_71j4m")
+
+[node name="Health" type="ProgressBar" parent="Player/Camera2D/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -568.0
+offset_top = 288.0
+offset_right = 568.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_qfnet")
 
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource("2_rwgxs")
+
+[node name="Enemy" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(168, -96)
+
+[connection signal="health_updated" from="Player" to="Player/Camera2D/HUD/Health" method="_on_player_health_updated"]
+[connection signal="xp_updated" from="Player" to="Player/Camera2D/HUD/XP" method="_on_player_xp_updated"]

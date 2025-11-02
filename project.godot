@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="GDE-Lab-InLab-3"
+run/main_scene="uid://bjjum7tvjdwc4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
